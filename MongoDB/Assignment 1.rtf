@@ -1,0 +1,283 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.18362}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 MongoDB Exercise in mongo shell\par
+Connect to a running mongo instance, use a database named mongo_practice.\par
+Document all your queries in a javascript file to use as a reference.\par
+Insert Documents\par
+Insert the following documents into a movies collection.\par
+title : Fight Club\par
+writer : Chuck Palahniuko\par
+year : 1999\par
+actors : [\par
+ Brad Pitt\par
+ Edward Norton\par
+]\par
+title : Pulp Fiction\par
+writer : Quentin Tarantino\par
+year : 1994\par
+actors : [\par
+ John Travolta\par
+ Uma Thurman\par
+]\par
+title : Inglorious Basterds\par
+writer : Quentin Tarantino\par
+year : 2009\par
+actors : [\par
+ Brad Pitt\par
+ Diane Kruger\par
+ Eli Roth\par
+]\par
+title : The Hobbit: An Unexpected Journey\par
+writer : J.R.R. Tolkein\par
+year : 2012\par
+franchise : The Hobbit\par
+title : The Hobbit: The Desolation of Smaug\par
+writer : J.R.R. Tolkein\par
+year : 2013\par
+franchise : The Hobbit\par
+title : The Hobbit: The Battle of the Five Armies\par
+writer : J.R.R. Tolkein\par
+year : 2012\par
+franchise : The Hobbit\par
+synopsis : Bilbo and Company are forced to engage in a war against an array of\par
+combatants and keep the Lonely Mountain from falling into the hands of a rising\par
+darkness.\par
+title : Pee Wee Herman's Big Adventure\par
+title : Avatar\par
+\b Ans:\par
+\b0 use mongo_practice\par
+db.createCollection("movies")\par
+\par
+db.movies.insertMany([\{\par
+    ...     title : "Fight Club",\par
+    ...      writer : "Chuck Palahniuko",\par
+    ...       year : 1999,\par
+    ...        actors : [ "Brad Pitt", "Edward Norton" ]\par
+    ... \},\par
+    ... \{\par
+    .....     title : "Pulp Fiction",\par
+    .....      writer : "Quentin Tarantino",\par
+    .....       year : 1994,\par
+    .....        actors : [ "John Travolta", "Uma Thurman" ]\par
+    ..... \},\{\par
+    .....\par
+    ..... title : "Inglorious Basterds",\par
+    .....  writer : "Quentin Tarantino",\par
+    .....   year : 2009,\par
+    .....    actors : [ "Brad Pitt", "Diane Kruger", "Eli Roth" ]\par
+    ..... \},\par
+    ... \{title : "The Hobbit: An Unexpected Journey",\par
+    .....      writer : "J.R.R. Tolkein",\par
+    .....       year : 2012,\par
+    .....        franchise : "The Hobbit"\par
+    .....\par
+    ... \},\par
+    ... \{\par
+    ...     title : "The Hobbit: The Desolation of Smaug",\par
+    ...      writer : "J.R.R. Tolkein",\par
+    ... year : 2013,\par
+    ...  franchise : "The Hobbit"\par
+    ... \},\par
+    ... \{\par
+    ...     title : "The Hobbit: The Battle of the Five Armies",\par
+    ...      writer : "J.R.R. Tolkein",\par
+    ...       year : 2012,\par
+    ...         synopsis : "Bilbo and Company are forced to engage in a war against an array of combatants and keep the Lonely Mountain from falling into the hands of a rising darkness."\par
+    ... \},\par
+    ... \{\par
+    ...     title : "Pee Wee Herman's Big Adventure"\par
+    ... \},\par
+    ... \{\par
+    ...     title : "Avatar"\par
+    ... \}\par
+    ... ])\par
+\par
+output: \{\par
+    acknowledged: true,\par
+    insertedIds: \{\par
+      '0': ObjectId("5ffc8e0ed6765e19ccc75aba"),\par
+      '1': ObjectId("5ffc8e0ed6765e19ccc75abb"),\par
+      '2': ObjectId("5ffc8e0ed6765e19ccc75abc"),\par
+      '3': ObjectId("5ffc8e0ed6765e19ccc75abd"),\par
+      '4': ObjectId("5ffc8e0ed6765e19ccc75abe"),\par
+      '5': ObjectId("5ffc8e0ed6765e19ccc75abf"),\par
+      '6': ObjectId("5ffc8e0ed6765e19ccc75ac0"),\par
+      '7': ObjectId("5ffc8e0ed6765e19ccc75ac1")\par
+    \}\par
+  \}\par
+\par
+\par
+  query the movies collection to\par
+  1. get all documents\b\par
+  cmd: db.movies.find()\b0\par
+\par
+  2. get all documents with writer set to "Quentin Tarantino"\par
+\b   cmd: db.movies.find(\{writer:"Quentin Tarantino"\})\par
+\b0\par
+  3. get all documents where actors include "Brad Pitt"\b\par
+  cmd: db.movies.find(\{actors:"Brad Pitt"\})\par
+\b0\par
+  4. get all documents with franchise set to "The Hobbit"\par
+  \b cmd: db.movies.find(\{franchise:"The Hobbit"\})\par
+\par
+\b0   5. get all movies released in the 90s\b\par
+  cmd:  db.movies.find(\{$and:[\{year:\{$gte:1990\}\},\{year:\{$lt:2000\}\}]\})\par
+\b0\par
+  6. get all movies released before the year 2000 or after 2010\par
+  \b cmd: db.movies.find(\{$or:[\{year:\{$gte:2010\}\},\{year:\{$lt:2000\}\}]\})\b0\par
+\par
+\par
+\par
+Update Documents\par
+  1. add a synopsis to "The Hobbit: An Unexpected Journey" : "A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug."\b\par
+  cmd: db.movies.update(\{title:"The Hobbit: An Unexpected Journey"\},\{$set:\{synopsis:"A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug."\}\})\par
+  \par
+\b0   \par
+  2. add a synopsis to "The Hobbit: The Desolation of Smaug" : "The dwarves, along with Bilbo Baggins and Gandalf the Grey, continue their quest to reclaim Erebor, their homeland, from Smaug. Bilbo Baggins is in possession of a mysterious and magical ring."\par
+\b   cmd: db.movies.updateOne(\{title:"The Hobbit: The Desolation of Smaug"\},\{$set:\{synopsis:"The dwarves, along with Bilbo Baggins and Gandalf the Grey, continue their quest to reclaim Erebor, their homeland, from Smaug. Bilbo Baggins is in possession of a mysterious and magical ring."\}\})\par
+\b0   \par
+  \par
+  3. add an actor named "Samuel L. Jackson" to the movie "Pulp Fiction"\par
+\b   cmd: db.movies.updateOne(\{title:"Pulp Fiction"\},\{$push:\{actors :"Samuel L. Jackson" \}\})\par
+  or \par
+  cmd: db.movies.updateOne(\{title:"Pulp Fiction"\},\{$set:\{"actors.2" :"Samuel L. Jackson" \}\})\par
+\b0\par
+\par
+  Text Search\par
+1. find all movies that have a synopsis that contains the word "Bilbo"\par
+\b cmd:  db.movies.find(\{synopsis:\{$regex:"Bilbo"\}\})\par
+\b0\par
+2. find all movies that have a synopsis that contains the word "Gandalf"\par
+\b cmd: db.movies.find(\{synopsis:\{$regex:"Gandalf"\}\})\par
+\b0\par
+3. find all movies that have a synopsis that contains the word "Bilbo" and not the word "Gandalf"\par
+\b cmd: db.movies.find(\{$and:[\{synopsis:\{$regex:"Bilbo"\}\},\{synopsis:\{$not:\{$regex:"Gandalf"\}\}\}]\})\par
+\b0\par
+4. find all movies that have a synopsis that contains the word "dwarves" or "hobbit"\par
+\b cmd:  db.movies.find(\{$or:[\{synopsis:\{$regex:"dwarves"\}\},\{synopsis:\{$regex:"hobbit"\}\}]\})\par
+\par
+\b0 5. find all movies that have a synopsis that contains the word "gold" and "dragon"\par
+\b cmd:  db.movies.find(\{$and:[\{synopsis:\{$regex:"gold"\}\},\{synopsis:\{$regex:"dragon"\}\}]\})\par
+\b0\par
+\par
+Delete Documents\par
+1. delete the movie "Pee Wee Herman's Big Adventure"\par
+\b cmd: db.movies.deleteOne(\{title:"Pee Wee Herman's Big Adventure"\})\par
+\b0\par
+2. delete the movie "Avatar"\par
+\b cmd: db.movies.deleteOne(\{title:"Avatar"\})\par
+\b0\par
+\par
+Relationships\par
+Insert the following documents into a users collection \par
+\par
+username : GoodGuyGreg first_name : "Good Guy" last_name : "Greg"\par
+\b cmd:   db.users.insertOne(\{username:"GoodGuyGreg",first_name:"Good Guy",last_name:"Greg"\})\b0\par
+\par
+username : ScumbagSteve full_name : first : "Scumbag" last : "Steve"\par
+\b cmd:  db.users.insertOne(\{username:"ScumbagSteve",full_name:\{first_name:"Good Guy",last_name:"Greg"\}\})\par
+\b0\par
+\par
+Insert the following documents into a posts collection \par
+username : GoodGuyGreg title : Passes out at party body : Wakes up early and cleans house\par
+\b cmd: db.posts.insertOne(\{username:"GoodGuyGreg",title:"Passes out at party",body:"Wakes up early and cleans house"\})\b0\par
+\par
+username : GoodGuyGreg title : Steals your identity body : Raises your credit score \par
+\b cmd: db.posts.insertOne(\{username : "GoodGuyGreg", title :" Steals your identity", body :" Raises your credit score"\})\par
+\b0\par
+username : GoodGuyGreg title : Reports a bug in your code body : Sends you a Pull Request \par
+\b cmd: db.posts.insertOne(\{username : "GoodGuyGreg", title :" Reports a bug in your code", body : "Sends you a Pull Request"\}\par
+\par
+\b0 username : ScumbagSteve title : Borrows something body : Sells it \par
+\b cmd: db.posts.insertOne(\{username : "ScumbagSteve", title :" Borrows something", body : "Sells it"\})\par
+\b0\par
+username : ScumbagSteve title : Borrows everything body : The end \par
+\b cmd: db.posts.insertOne(\{username : "ScumbagSteve", title : "Borrows everything", body : "The end" \})\par
+\b0\par
+username : ScumbagSteve title : Forks your repo on github body : Sets to private\par
+\b cmd: db.posts.insertOne(\{username : "ScumbagSteve", title :" Forks your repo on github", body : "Sets to private"\})\par
+\b0\par
+\par
+\b Insert the following documents into a comments collection\par
+\b0 username : GoodGuyGreg\par
+comment : Hope you got a good deal!\par
+post : [post_obj_id]\par
+where [post_obj_id] is the ObjectId of the posts document: "Borrows something"\par
+username : GoodGuyGreg\par
+comment : What's mine is yours!\par
+post : [post_obj_id]\par
+where [post_obj_id] is the ObjectId of the posts document: "Borrows everything"\par
+username : GoodGuyGreg\par
+comment : Don't violate the licensing agreement!\par
+post : [post_obj_id]\par
+where [post_obj_id] is the ObjectId of the posts document: "Forks your repo on\par
+github\par
+username : ScumbagSteve\par
+comment : It still isn't clean\par
+post : [post_obj_id]\par
+where [post_obj_id] is the ObjectId of the posts document: "Passes out at party"\par
+username : ScumbagSteve\par
+comment : Denied your PR cause I found a hack\par
+post : [post_obj_id]\par
+where [post_obj_id] is the ObjectId of the posts document: "Reports a bug in your\par
+code"\par
+\par
+\b db.comments.insertOne(\par
+\{username : "GoodGuyGreg", \par
+comment : "Hope you got a good deal!", \par
+post : ObjectId("5ffd648b651aea3558f541ee")\par
+\})\par
+\par
+db.comments.insertOne(\{\par
+username : "GoodGuyGreg", \par
+comment : "What's mine is yours!", \par
+post :  ObjectId("5ffd64c6651aea3558f541ef")\par
+\})\par
+\par
+db.comments.insertOne(\{\par
+username : "GoodGuyGreg",\par
+ comment : "Don't violate the licensing agreement!",\par
+  post :  ObjectId("5ffd64f9651aea3558f541f0")\par
+\})\par
+\par
+db.comments.insertOne(\{\par
+username : "ScumbagSteve",\par
+ comment : "It still isn't clean",\par
+post : ObjectId("5ffd639e651aea3558f541eb")\par
+\})\par
+\par
+\par
+db.comments.insertOne(\{\par
+username : "ScumbagSteve",\par
+ comment : "Denied your PR cause I found a hack",\par
+  post :ObjectId("5ffd644c651aea3558f541ed")\par
+\})\par
+\b0\par
+\par
+\par
+Querying related collections\par
+1. find all users\par
+\b cmd: db.users.find()\par
+\b0\par
+2. find all posts\par
+\b cmd: db.ports.find()\par
+\b0\par
+3. find all posts that was authored by "GoodGuyGreg"\par
+\b cmd:  db.posts.find(\{username:"GoodGuyGreg"\})\par
+\b0\par
+4. find all posts that was authored by "ScumbagSteve"\par
+\b cmd: db.posts.find(\{username: "ScumbagSteve"\})\par
+\par
+\b0 5. find all comments\par
+\b cmd: db.comments.find()\par
+\b0\par
+6. find all comments that was authored by "GoodGuyGreg"\par
+\b cmd: db.comments.find(\{username:"GoodGuyGreg"\})\par
+\b0\par
+7. find all comments that was authored by "ScumbagSteve"\par
+\b cmd: db.comments.find(\{username:"ScumbagSteve"\})\par
+\b0\par
+8. find all comments belonging to the post "Reports a bug in your code"\par
+\b cmd:  db.comments.find(\{post:ObjectId("5ffd644c651aea3558f541ed")\})\par
+}
+ 
