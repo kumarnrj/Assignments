@@ -26,6 +26,8 @@ class MovieDetails {
     private String actress;
     private String genre;
 
+    public MovieDetails(){}
+
     public MovieDetails(String movieName, String actor, String actress, String genre) {
         this.movieName = movieName;
         this.actor = actor;
@@ -65,57 +67,68 @@ class MovieDetails {
         this.genre = genre;
     }
 
-    @Override
+
     public String toString() {
+        super.hashCode();
         return "MovieDetails{" +
                 "movieName='" + movieName + '\'' +
                 ", actor='" + actor + '\'' +
                 ", actress='" + actress + '\'' +
                 ", genre='" + genre + '\'' +
-                +'}';
+                '}';
+    }
+    @Override
+    public boolean equals(Object obj) {
+        return true;
     }
 
-    @Override
-    public int hashCode() {
-        return 0;
-    }
 }
 
 public class Assignment3Q10 {
     public static void main(String[] args) {
 
+        System.out.println("inside main");
         MovieDetails m1 = new MovieDetails("Bahubali", "Prabhas", "Anushka", "Drama");
         MovieDetails m2 = new MovieDetails("10", "Vikram", "Sam", "Action");
 
         Assignment3Q10 assignment3Q10 = new Assignment3Q10();
         assignment3Q10.addMovie(m1);
         assignment3Q10.addMovie(m2);
-        System.out.println(assignment3Q10.find_movie_By_mov_Name("10"));
-        System.out.println(assignment3Q10.find_movie_By_Genre("Action"));
 
     }
 
-    public static void sort(ArrayList<MovieDetails> movieDetails, Comparator<MovieDetails> movieDetailsComparator){}
+    public static void sort(ArrayList<MovieDetails> movieDetails, Comparator<MovieDetails> movieDetailsComparator){
+        System.out.println("Inside sort");
+    }
 
     public static void printSortedMovieList(ArrayList<MovieDetails> movieDetails){
+        System.out.println("print sortedlist");
         System.out.println(movieDetails);
     }
-    List<MovieDetails>movieDetails = new ArrayList<>();
+    private static  List<MovieDetails>movieDetails = new ArrayList<>();
     public void addMovie(MovieDetails movie) {
+
+        System.out.println("insidde add movie");
+        System.out.println(movieDetails);
+        System.out.println(movie);
         movieDetails.add(movie);
 
     }
 
-    public void removeMovies(String movieName) {}
+    public void removeMovies(String movieName) {
+        System.out.println("Inside remove movie");
+    }
 
-    public void removeAllMovies(List<MovieDetails> movies) {}
+    public void removeAllMovies(List<MovieDetails> movies) {
+        System.out.println("Inside removea all" );
+    }
 
     public MovieDetails find_movie_By_mov_Name(String movieName) {
 
         MovieDetails movieDetail = new MovieDetails();
         for(MovieDetails list:movieDetails){
             if(movieName.equals(list.getMovieName())){
-                 movieDetail= list;
+                movieDetail= list;
             }
         }
         return movieDetail;
@@ -124,22 +137,25 @@ public class Assignment3Q10 {
 
     public List<MovieDetails> find_movie_By_Genre(String genre) {
         List<MovieDetails> movieDetailsList = new ArrayList<>();
+        //movieDetailsList.add(new MovieDetails("a","b","c","d"));
         for (MovieDetails list:movieDetails){
             if(genre.equals(list.getGenre())){
-                movieDetailsList.add(1,list);
+                MovieDetails m = new MovieDetails();
+                m= list;
+                movieDetailsList.add(m);
             }
         }
         return movieDetailsList;
     }
 
     public static Comparator<MovieDetails> sortAccordingly(String sortBy) {
-        System.out.println(sortBy);
-       Comparator<MovieDetails> movieDetailsComparator = new Comparator<MovieDetails>() {
-           @Override
-           public int compare(MovieDetails o1, MovieDetails o2) {
-               return 0;
-           }
-       };
-       return movieDetailsComparator;
+        System.out.println("inside comapratrpr");
+        Comparator<MovieDetails> movieDetailsComparator = new Comparator<MovieDetails>() {
+            @Override
+            public int compare(MovieDetails o1, MovieDetails o2) {
+                return 0;
+            }
+        };
+        return movieDetailsComparator;
     }
 }
