@@ -1,4 +1,4 @@
-package com.capgemini.springAssignment.Q3;
+package com.springAssignment.Q3;
 
 import org.springframework.aop.framework.AopConfigException;
 import org.springframework.context.ApplicationContext;

@@ -1,4 +1,7 @@
-package com.capgemini.springAssignment.Q3;
+package com.capgemini.springAssignment.Q4;
+
+import org.springframework.context.annotation.Configuration;
+
 
 public class BankAccount {
     private  long accountId;

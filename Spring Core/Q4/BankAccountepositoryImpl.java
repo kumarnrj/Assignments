@@ -1,11 +1,15 @@
-package com.capgemini.springAssignment.Q3;
+package com.capgemini.springAssignment.Q4;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-public class BankAccountepositoryImpl implements  BankAccountRepository {
+@Repository("BankRepo")
+public class BankAccountepositoryImpl implements BankAccountRepository {
 
+    @Autowired
     private BankAccount bankAccount1;
+
+    @Autowired
     private BankAccount bankAccount2;
 
     public  void  BankAccountepositoryImpl(){}
