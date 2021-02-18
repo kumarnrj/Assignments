@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <style>
+      form.submission-form{
+          max-width: 500px;
+          margin: 2rem auto;
+          border: 2px solid #E74C3C;
+          padding: 2rem;
+          
+         
+       }
+       label{
+              display: block;
+          }
+          input,textarea{
+              display: block;
+          }
+          #btn{
+              border: 0;
+              background: #343050;
+              padding: 5px;
+              color: white;
+              margin: 8px;
+              cursor: pointer;
+              
+          }
+          #btn:hover{
+              background: #3498D8;
+          }
+   </style>
+</head>
+<body>
+   <form class="submission-form">
+       <lable for ="firstName">
+           First Name:
+       </lable>
+       <input type ="text" id="firstName"/>
+       <lable for ="lastName">
+        Last Name:
+    </lable>
+    <input type ="text" id="lastName"/>
+    <lable for ="email">
+        Email:
+    </lable>
+    <input type ="email" id="email"/>
+    <lable for ="phone">
+        Telephone:
+    </lable>
+    <input type ="tel" id="phone"/>
+    <lable for ="message">
+        Message:
+    </lable>
+    <textarea id="message"></textarea>
+    <input id="btn" type="submit" value="submit"/>
+
+   </form>
+  
+</body>
+</html>
