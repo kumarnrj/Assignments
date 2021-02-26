@@ -75,15 +75,20 @@ function isArmstrong(num){
     }
 }
 
- function *getNextArmstrong(){
-        var num =153;
-        if(isArmstrong(num)){
-            console.log(num);
-            num++;
+function *getNextArmstrong(){
+    let i=0;
+    while(true){
+        if( isArmstrong(i)){
+            yield i;
         }
-        yield "please wait";
-        return "Returend";
- }
+        if(i>1000){
+            i=0;
+            yield "number is too larger";
+        }
+        i++;
+    }
+}
+
  var g = getNextArmstrong();
 console.log(g.next());
 console.log(g.next().value)
