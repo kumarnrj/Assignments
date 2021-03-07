@@ -94,3 +94,55 @@ console.log(g.next());
 console.log(g.next().value)
 console.log(g.next().value)
 
+/**
+ * 4.	Collections: Using Set & Map, create a static data for chatting application. 
+ * Here we have 2 chatrooms, every chatroom is having 3 
+ * users & every user has posted different messages in a chat room. Note that one user can 
+ * belong to a single chat room only. Now you need to find out how you will hold this data 
+ * using Set & Map data structures. Also add functionality to get list of all users from a 
+ * specific chatroom & listing down all message from a chatroom.
+ */
+
+
+
+
+                              
+
+                          //Assignment 3
+
+ /**
+ * 1.	Promises: Create 2 promises, one generates value of x & another generates value of y.
+ *  Write a program to print sum of x & y. (Use Promise.all)
+ */
+
+ 
+var promise1 = new Promise(function(resolve,reject){
+    let x=2;
+    if(x!=0){
+        resolve(x);
+    }
+    else{
+        reject("x value is 0");
+    }
+})
+var promise2 = new Promise(function(resolve,reject){
+    let y=5;
+    if(y!=0){
+        resolve(y);
+    }
+    else{
+        reject("y value is 0");
+    }
+})
+
+
+ Promise.all([promise1,promise2]).then(function(values){
+     let sum =0;
+    for(let num in values){
+        sum+=values[num];
+    }
+    console.log(sum)
+ })
+
+
+ 
